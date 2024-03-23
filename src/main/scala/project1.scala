@@ -13,12 +13,11 @@ object Main {
     val regex = """\((?=(?:[^']*'[^']*')*[^']*$)"""
     val columnNames = Seq("peer_id", "id_1", "id_2", "year")
 
-    // 解析JSON字符串到Data对象列表
+    // parse jsonlike string to dataframe
     val dataList = jsonString.stripMargin.replaceAll(regex, "").replaceAll("[\\[\\]()]", "").replaceAll("'", "").split(",").map(_.trim).grouped(4).toList.map {
       case Array(a, b, c, d) => Data(a, b, c, d.toInt)
     }
 
-    // 将数据列表转换为DataFrame
     spark.createDataFrame(dataList)
   }
 
@@ -63,7 +62,7 @@ object Main {
   def main(args: Array[String]): Unit = {
     val spark = SparkSession.builder
       .appName("MySparkApp")
-      .master("local[2]") // 在本地运行，使用2个核心
+      .master("local[2]")
       .getOrCreate()
 
     val jsonString1 = """[
