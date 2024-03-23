@@ -22,7 +22,6 @@ class MySparkFunctionsTest extends AnyFunSuite with Matchers with DataFrameSuite
 
   override def beforeAll(): Unit = {
     super.beforeAll()
-    // 现在spark是通过lazy val正确初始化的
   }
 
   override def afterAll(): Unit = {
@@ -106,7 +105,6 @@ class MySparkFunctionsTest extends AnyFunSuite with Matchers with DataFrameSuite
     val inputDfColumns = Seq("peer_id", "year", "cumulative_sum")
     val inputDf = spark.createDataFrame(inputDfData).toDF(inputDfColumns: _*)
 
-    // 设置sizeNumber值为6
     val sizeNumber = 6
 
     val expectedDfData = Seq(
